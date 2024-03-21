@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login_&_Signup_form</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Font-awesome/css/all.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>
+                <a href="index.html">
+                    <i class="fas fa-paw"></i> <br>
+                    Bienvenue chez nos amis les animaux
+                </a>
+            </h1>
+        </div>
+        <div class="right">
+            <form method="POST" id="sign_in">
+                <h2 class="title">
+                    <a href="index.html">
+                        <i class="fas fa-paw"></i> Connexion
+                    </a>
+                </h2>
+                <div class="inputs">
+                    <div class="input-box">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email_login" placeholder="Entrez votre email" required>
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i> 
+                        <input type="password" name="pasword_login" placeholder="Entrez votre mot de passe" required>
+                    </div>
+                    <div class="alerte">
+                        <a href="#">Mot de passe oulblié ?</a>
+                    </div>
+                    <div class="button">
+                        <input type="submit" name="" value="Se connecter">
+                        <div class="changeform">
+                            <span>Pas encore membre ?</span>
+                            <b onclick="showIns(); return false;" href="#">Inscrivez-vous</b>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form method="POST" id="sign_up">
+                <h2 class="title">
+                   <a href="index.html"><i class="fas fa-paw"></i> Inscription</a>
+                </h2>
+                <div class="inputs">
+                    <div class="input-box">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Entrez un mail" required>
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-globe"></i>
+                        <select name="pays" id="countrySelect"></select>
+                    </div>
+                    <div class="input-box">
+                        <i class="fas fa-lock"></i> 
+                        <input type="password" name="password" id="password" placeholder="Entrez un mot de passe" required>
+                    </div>
+                    <div class="input-box"><i class="fas fa-lock"></i>
+                        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmer le mot de passe" required> 
+                    </div>
+                    <div class="show_password">
+                        <input type="checkbox" id="show_password">
+                        <label for="show_password">Voir le mot de passe</label>
+                    </div>
+                    <div class="button">
+                        <input type="submit" name="" value="S'inscrire">
+                        <div class="changeform">
+                            <span>Déjà membre ?</span>
+                            <b onclick="showCon(); return false;" href="#">Connectez-vous</b>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Liste des pays -->
+    <script src="select_pays.js"></script>
+
+    <!-- Afficher le formulaire d'inscription -->
+    <script>
+        function showIns() {
+            var signup_form = document.getElementById('sign_up');
+            var signin_form = document.getElementById('sign_in');
+
+            signup_form.style.display = "block";
+            signin_form.style.display = "none";
+        }
+    </script>
+    
+    <!-- Afficher le formulaire de connexion -->
+    <script>
+        function showCon() {
+            var signin_form = document.getElementById('sign_in');
+            var signup_form = document.getElementById('sign_up');
+
+            signin_form.style.display = "block";
+            signup_form.style.display = "none";
+        }
+    </script>
+
+    <!-- Voir le mots de passe -->
+    <script>
+        password = document.querySelector("#password"),
+        confirm_password = document.querySelector("#confirm_password"),
+        show_password = document.querySelector("#show_password");
+        
+        show_password.addEventListener("click", ()=>{
+            if((password.type === "password") && (confirm_password.type === "password")){
+                password.type = "text";
+                confirm_password.type = "text";
+            }else {
+                password.type = "password";
+                confirm_password.type = "password";
+            }
+        });
+    </script>
+
+    <!-- Vérification des inputs -->
+    <script>
+        document.querySelector('input[name="email"]').addEventListener('input', function() {
+            var emailInput = this.value;
+            var regex_email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+            if (!regex_email.test(emailInput)) {
+                this.setCustomValidity("Veuillez entrer une adresse mail valide !");
+            } else {
+                this.setCustomValidity("");
+            }
+        });
+        
+        document.querySelector('input[name="password"]').addEventListener('input', function() {
+            var passwordInput = this.value;
+            var regex_password = /^.{8,}$/;
+            
+            if (!regex_password.test(passwordInput)) {
+                this.setCustomValidity("Votre mot de passe doit contenir au moins 8 caractères !");
+            }else {
+                this.setCustomValidity("");
+            }
+        });
+    </script>
+</body>
+</html>
